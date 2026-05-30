@@ -5,6 +5,15 @@
 ![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-06B6D4?logo=tailwindcss&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-온라인_바로보기-000000?logo=vercel&logoColor=white)](https://welfare-demo-huss.vercel.app/)
+
+### 🔗 라이브 데모 (Quick Start)
+
+> **별도 설치 없이 바로 확인하세요 → https://welfare-demo-huss.vercel.app/**
+>
+> 최신 브라우저에서 위 주소로 접속하면 5단계 분석 파이프라인·활용도 비교·모니터링 대시보드를 그대로 사용할 수 있습니다. 로컬 실행 방법은 [시작하기](#시작하기) 절을 참고하세요.
+
+---
 
 투명한 위험 점수 모형과 설명 가능한 근거 생성을 결합한 **복지 사각지대 발굴 보조 시스템**의 개념 증명(PoC) 웹 데모입니다. 보건복지부 ‘복지 사각지대 발굴관리시스템(행복e음)’ 같은 기존 광역 발굴 체계를 **대체하지 않고**, 그 발굴 결과의 **해석 가능성·활용도**를 높이는 보조 레이어(assistive layer)를 지향합니다.
 
