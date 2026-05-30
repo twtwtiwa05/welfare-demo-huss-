@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vercel
+
+# 로그
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 에디터
+.vscode/*
+!.vscode/extensions.json
+.idea
+
+# 도구 상태 (oh-my-claudecode 등)
+.omc/
