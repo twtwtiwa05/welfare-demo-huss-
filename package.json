@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "description": "복지망 잔여 사각지대 발굴·모니터링 AI 에이전트 — 투명 위험 점수 모형과 설명 가능한 근거 생성을 결합한 PoC 웹 데모",
+  "author": "Taewoo Kim <twdaniel@gachon.ac.kr>",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
