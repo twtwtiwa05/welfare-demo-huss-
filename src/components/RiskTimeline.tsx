@@ -19,23 +19,26 @@ export default function RiskTimeline({ household }: { household: Household }) {
 
   return (
     <div>
-      <div className="mb-1 flex items-center justify-between">
-        <span className="text-sm font-bold text-slate-700">위험도 시계열 (8주)</span>
-        <span
-          className="text-xs font-semibold"
-          style={{ color }}
-        >
+      <div className="mb-1.5 flex items-center justify-between">
+        <span className="card-title">위험도 시계열 (8주)</span>
+        <span className="text-xs font-semibold" style={{ color }}>
           {trend > 0 ? `▲ +${trend}점 (상승 추세)` : trend < 0 ? `▼ ${trend}점 (하강 추세)` : "─ 변동 없음"}
         </span>
       </div>
       <ResponsiveContainer width="100%" height={200}>
         <LineChart data={household.history} margin={{ top: 8, right: 12, left: -12, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-          <XAxis dataKey="week" tick={{ fontSize: 12, fill: "#94a3b8" }} />
-          <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: "#94a3b8" }} />
+          <XAxis dataKey="week" tick={{ fontSize: 12, fill: "#94a3b8" }} axisLine={{ stroke: "#e2e8f0" }} tickLine={false} />
+          <YAxis domain={[0, 100]} tick={{ fontSize: 12, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
           <Tooltip
             formatter={(v: number) => [`${v}점`, "위험 점수"]}
-            contentStyle={{ fontSize: 13, borderRadius: 8 }}
+            contentStyle={{
+              fontSize: 13,
+              borderRadius: 10,
+              border: "1px solid #e2e8f0",
+              boxShadow: "0 4px 16px rgba(15,23,42,0.10)",
+            }}
+            cursor={{ stroke: "#cbd5e1", strokeDasharray: "4 4" }}
           />
           <ReferenceLine
             y={BAND_CUTOFFS.high}

@@ -17,3 +17,6 @@ yarn-error.log*
 
 # 도구 상태 (oh-my-claudecode 등)
 .omc/
+
+# TypeScript 빌드 캐시
+*.tsbuildinfo

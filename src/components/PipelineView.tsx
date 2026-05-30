@@ -71,16 +71,16 @@ export default function PipelineView() {
       <StepProgressBar steps={STEPS} current={step} onSelect={setStep} />
 
       {/* 분석 대상 가구 빠른 선택 */}
-      <div className="flex flex-wrap items-center gap-2">
-        <span className="text-xs font-semibold text-slate-500">분석 대상</span>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-2">
+        <span className="section-label">분석 대상</span>
         {SHOWCASES.map((sc) => (
           <button
             key={sc.id}
             onClick={() => setSelectedId(sc.id)}
-            className={`rounded-full border px-3 py-1 text-xs font-semibold transition-colors ${
+            className={`rounded-full border px-3 py-1 text-xs font-semibold transition-all duration-200 ${
               selectedId === sc.id
-                ? "border-brand-600 bg-brand-600 text-white"
-                : "border-slate-200 bg-white text-slate-600 hover:border-brand-300"
+                ? "border-brand-600 bg-brand-600 text-white shadow-sm"
+                : "border-slate-200 bg-white text-slate-600 hover:border-brand-300 hover:text-brand-700"
             }`}
           >
             {sc.label}
@@ -93,13 +93,15 @@ export default function PipelineView() {
       </div>
 
       {/* 단계 목표 */}
-      <div className="rounded-lg bg-slate-100 px-4 py-2 text-sm text-slate-600">
-        <span className="font-bold text-brand-700">STEP {step}.</span>{" "}
-        {STEP_GOAL[step]}
+      <div className="flex items-start gap-2.5 rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-2.5 text-sm text-slate-600">
+        <span className="mt-px shrink-0 rounded-md bg-brand-600 px-2 py-0.5 text-xs font-bold text-white">
+          STEP {step}
+        </span>
+        <span className="leading-relaxed">{STEP_GOAL[step]}</span>
       </div>
 
       {/* 단계 본문 */}
-      <div key={step} className="animate-[fadeIn_0.35s_ease]">
+      <div key={step} className="animate-fadeIn">
         {step === 1 && (
           <Step1RawSignals selectedId={selectedId} onSelect={setSelectedId} />
         )}
@@ -114,14 +116,17 @@ export default function PipelineView() {
         <button
           onClick={() => setStep((s) => Math.max(1, s - 1))}
           disabled={step === 1}
-          className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-3 py-2 text-sm font-semibold text-slate-600 disabled:opacity-40"
+          className="btn-secondary"
         >
           <ChevronLeft size={16} /> 이전
         </button>
+        <span className="text-xs font-medium text-slate-400">
+          {step} / {STEPS.length}
+        </span>
         <button
           onClick={() => setStep((s) => Math.min(STEPS.length, s + 1))}
           disabled={step === STEPS.length}
-          className="inline-flex items-center gap-1 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white disabled:opacity-40"
+          className="btn-primary"
         >
           다음 <ChevronRight size={16} />
         </button>

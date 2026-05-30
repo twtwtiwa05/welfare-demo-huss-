@@ -27,21 +27,26 @@ const SHORTLIST = RESIDUAL.filter((h) => combinationMethod(h))
 export default function BeforeAfterView() {
   return (
     <div className="space-y-4">
-      <div className="rounded-lg bg-slate-100 px-4 py-2.5 text-sm text-slate-600">
-        <span className="font-bold text-brand-700">③ 활용도</span> — 발굴 명단은
-        이미 존재합니다. 문제는 인력이 부족한 현장에서 ‘이 목록 중 누구를, 왜,
-        먼저’ 봐야 하는지가 빠져 있다는 것입니다. <b>데이터는 똑같습니다. 바뀌는
-        건 담당자가 행동할 수 있느냐입니다.</b>
+      <div className="rounded-xl border border-brand-100 bg-brand-50/60 px-4 py-3 text-sm leading-relaxed text-slate-600">
+        <span className="mr-1 rounded-md bg-brand-600 px-2 py-0.5 text-xs font-bold text-white">
+          ③ 활용도
+        </span>{" "}
+        발굴 명단은 이미 존재합니다. 문제는 인력이 부족한 현장에서 ‘이 목록 중
+        누구를, 왜, 먼저’ 봐야 하는지가 빠져 있다는 것입니다.{" "}
+        <b className="text-brand-800">
+          데이터는 똑같습니다. 바뀌는 건 담당자가 행동할 수 있느냐입니다.
+        </b>
       </div>
 
       <div className="grid gap-4 lg:grid-cols-2">
         {/* BEFORE — 행복e음 방식 */}
-        <div className="rounded-xl border border-slate-200 bg-white">
-          <div className="rounded-t-xl bg-slate-100 px-4 py-2.5">
-            <div className="text-sm font-bold text-slate-600">
+        <div className="card overflow-hidden">
+          <div className="border-b border-slate-100 bg-slate-50/70 px-4 py-3">
+            <div className="flex items-center gap-2 text-sm font-bold text-slate-600">
+              <span className="section-label !text-slate-400">Before</span>
               기존 · 명단 통보
             </div>
-            <div className="text-xs text-slate-400">
+            <div className="mt-0.5 text-xs text-slate-400">
               점수순 목록은 있으나 “왜·무엇을 먼저”가 없음
             </div>
           </div>
@@ -58,18 +63,19 @@ export default function BeforeAfterView() {
               </div>
             ))}
           </div>
-          <div className="px-4 py-3 text-center text-sm text-slate-400">
+          <div className="bg-slate-50/50 px-4 py-3 text-center text-sm text-slate-400">
             “이 중 누구를 먼저 봐야 하나?”
           </div>
         </div>
 
         {/* AFTER — 우리 방식 */}
-        <div className="rounded-xl border border-brand-300 bg-white">
-          <div className="rounded-t-xl bg-brand-50 px-4 py-2.5">
-            <div className="text-sm font-bold text-brand-700">
+        <div className="card overflow-hidden border-brand-300 ring-1 ring-brand-100">
+          <div className="border-b border-brand-100 bg-brand-50 px-4 py-3">
+            <div className="flex items-center gap-2 text-sm font-bold text-brand-700">
+              <span className="section-label !text-brand-500">After</span>
               우리 · 근거 + 우선순위 + 추적
             </div>
-            <div className="text-xs text-slate-500">
+            <div className="mt-0.5 text-xs text-slate-500">
               같은 명단에 ‘행동 가능한’ 정보를 더함
             </div>
           </div>
@@ -79,32 +85,35 @@ export default function BeforeAfterView() {
               const delta = weeklyDelta(h);
               const cl = caseLabel(h.caseType);
               return (
-                <div key={h.id} className="px-4 py-3">
+                <div
+                  key={h.id}
+                  className="px-4 py-3 transition-colors hover:bg-brand-50/40"
+                >
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-xs text-slate-500">
                       {h.id}
                     </span>
                     <RiskBadge score={sc(h)} size="sm" />
                     {cl && (
-                      <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-slate-600">
+                      <span className="chip bg-slate-100 px-1.5 text-[11px] text-slate-600">
                         {cl.tag}
                       </span>
                     )}
                     {delta > 0 ? (
-                      <span className="ml-auto inline-flex items-center gap-0.5 rounded-full bg-red-100 px-2 py-0.5 text-[11px] font-semibold text-red-700">
+                      <span className="chip ml-auto bg-red-100 text-[11px] text-red-700">
                         <TrendingUp size={12} /> 이번 주 +{delta}점
                       </span>
                     ) : delta < 0 ? (
-                      <span className="ml-auto inline-flex items-center gap-0.5 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-semibold text-emerald-700">
+                      <span className="chip ml-auto bg-emerald-100 text-[11px] text-emerald-700">
                         <ArrowDown size={12} /> {delta}점
                       </span>
                     ) : null}
                   </div>
-                  <p className="mt-1.5 text-sm leading-snug text-slate-700">
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-700">
                     {reason.rationale}
                   </p>
-                  <div className="mt-1.5 flex items-start gap-1.5 text-xs text-brand-700">
-                    <span className="font-semibold">권고</span>
+                  <div className="mt-2 flex items-start gap-1.5 rounded-lg bg-brand-50/60 px-2.5 py-1.5 text-xs">
+                    <span className="font-bold text-brand-700">권고</span>
                     <span className="text-slate-600">
                       {reason.recommendations[0]?.action}
                     </span>
@@ -113,13 +122,13 @@ export default function BeforeAfterView() {
               );
             })}
           </div>
-          <div className="px-4 py-3 text-center text-sm font-semibold text-brand-700">
+          <div className="bg-brand-50/50 px-4 py-3 text-center text-sm font-semibold text-brand-700">
             “급상승한 {SHORTLIST[0]?.id}부터, 이 근거로.”
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-sm text-slate-500">
+      <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm leading-relaxed text-slate-500 shadow-card">
         ※ 최종 전화·방문 결정은 담당자가 합니다. AI는 발굴·근거·우선순위까지만
         기여합니다 (책임 분리).
       </div>

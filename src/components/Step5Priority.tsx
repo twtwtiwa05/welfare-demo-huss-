@@ -57,12 +57,14 @@ export default function Step5Priority({
       </div>
 
       {/* 추가로 보는 케이스 — 정성 메시지 (절대배수 금지) */}
-      <div className="rounded-lg border border-brand-300 bg-brand-50 px-4 py-3 text-sm text-brand-800">
-        <ArrowRight size={16} className="mr-1 inline" />
-        조합 방식은 임계값 방식이 놓친{" "}
-        <span className="font-bold">{r.onlyCombination.length}건</span>을 추가로
-        후보에 올립니다 (대부분 <b>유형 B·C</b> — 임계 미만 조합/집단 특화).
-        파란 하이라이트가 그 케이스입니다.
+      <div className="flex items-start gap-2.5 rounded-xl border border-brand-300 bg-brand-50 px-4 py-3 text-sm leading-relaxed text-brand-800 shadow-card">
+        <ArrowRight size={16} className="mt-0.5 shrink-0" />
+        <span>
+          조합 방식은 임계값 방식이 놓친{" "}
+          <span className="font-bold">{r.onlyCombination.length}건</span>을 추가로
+          후보에 올립니다 (대부분 <b>유형 B·C</b> — 임계 미만 조합/집단 특화).
+          파란 하이라이트가 그 케이스입니다.
+        </span>
       </div>
 
       {/* 거짓음성(놓침) 미니 지표 — 기획서 6.2의 1순위 지표 */}
@@ -87,10 +89,10 @@ export default function Step5Priority({
       </div>
 
       {/* 순환 자백 — 정직성 (G) */}
-      <div className="flex gap-2 rounded-lg border border-slate-300 bg-slate-50 p-4 text-sm text-slate-600">
+      <div className="flex gap-2.5 rounded-xl border border-slate-300 bg-slate-50/80 p-4 text-sm leading-relaxed text-slate-600">
         <AlertCircle size={18} className="mt-0.5 shrink-0 text-slate-400" />
         <div>
-          <div className="mb-1 flex items-center gap-2 font-semibold text-slate-700">
+          <div className="mb-1.5 flex flex-wrap items-center gap-2 font-semibold text-slate-700">
             이 비교가 증명하는 것 / 증명하지 않는 것 <SimBadge label="합성 데이터" />
           </div>
           위 케이스들은 우리가 ‘조합으로 잡히도록’ <b>설계한 합성 데이터</b>입니다.
@@ -117,13 +119,15 @@ function Column({
 }) {
   return (
     <div
-      className={`rounded-xl border ${
-        tone === "brand" ? "border-brand-300" : "border-slate-200"
-      } bg-white`}
+      className={`card overflow-hidden ${
+        tone === "brand" ? "border-brand-300 ring-1 ring-brand-100" : ""
+      }`}
     >
       <div
-        className={`rounded-t-xl px-4 py-2.5 ${
-          tone === "brand" ? "bg-brand-50" : "bg-slate-50"
+        className={`border-b px-4 py-3 ${
+          tone === "brand"
+            ? "border-brand-100 bg-brand-50"
+            : "border-slate-100 bg-slate-50/70"
         }`}
       >
         <div
@@ -133,9 +137,11 @@ function Column({
         >
           {title}
         </div>
-        <div className="text-xs text-slate-500">{subtitle}</div>
+        <div className="mt-0.5 text-xs text-slate-500">{subtitle}</div>
       </div>
-      <div className="max-h-80 space-y-1 overflow-auto p-2">{children}</div>
+      <div className="scroll-slim max-h-80 space-y-1 overflow-auto p-2">
+        {children}
+      </div>
     </div>
   );
 }
@@ -155,16 +161,16 @@ function CaseRow({
   return (
     <button
       onClick={() => onSelect(h.id)}
-      className={`flex w-full items-center gap-2 rounded-lg px-3 py-1.5 text-left text-sm transition-colors ${
+      className={`flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
         highlight
-          ? "bg-brand-100 ring-1 ring-brand-300 hover:bg-brand-200"
+          ? "bg-brand-100 ring-1 ring-inset ring-brand-300 hover:bg-brand-200"
           : "hover:bg-slate-50"
       }`}
     >
       <span className="font-mono text-xs text-slate-500">{h.id}</span>
       <span className="tabular-nums font-bold text-slate-800">{sc(h)}</span>
       {cl && (
-        <span className="rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-slate-600">
+        <span className="chip bg-slate-100 px-1.5 text-[11px] text-slate-600">
           {cl.tag}
         </span>
       )}
@@ -199,11 +205,21 @@ function Metric({
       : tone === "good"
         ? "text-brand-700"
         : "text-slate-800";
+  const accent =
+    tone === "warn"
+      ? "border-t-red-400"
+      : tone === "good"
+        ? "border-t-brand-400"
+        : "border-t-slate-300";
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-3 text-center">
-      <div className={`text-2xl font-bold tabular-nums ${cls}`}>{value}</div>
-      <div className="mt-0.5 text-xs font-semibold text-slate-600">{label}</div>
-      <div className="text-[11px] text-slate-400">{note}</div>
+    <div
+      className={`card border-t-2 ${accent} p-3.5 text-center`}
+    >
+      <div className={`text-2xl font-bold tabular-nums leading-none ${cls}`}>
+        {value}
+      </div>
+      <div className="mt-1.5 text-xs font-semibold text-slate-600">{label}</div>
+      <div className="mt-0.5 text-[11px] text-slate-400">{note}</div>
     </div>
   );
 }

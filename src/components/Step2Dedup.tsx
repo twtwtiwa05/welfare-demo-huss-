@@ -16,10 +16,10 @@ export default function Step2Dedup() {
       <div className="flex flex-wrap items-center gap-3">
         <button
           onClick={() => setApplied((v) => !v)}
-          className="inline-flex items-center gap-2 rounded-lg bg-brand-600 px-4 py-2 text-sm font-semibold text-white"
+          className={applied ? "btn-secondary" : "btn-primary"}
         >
           {applied ? <RotateCcw size={16} /> : <Play size={16} />}
-          {applied ? "되돌리기" : "중복제거 실행 ▶"}
+          {applied ? "되돌리기" : "중복제거 실행"}
         </button>
         <SimBadge
           label="행복e음 플래그 = 시뮬레이션"
@@ -43,8 +43,8 @@ export default function Step2Dedup() {
       </div>
 
       {/* 가구 그리드 */}
-      <div className="rounded-xl border border-slate-200 bg-white p-4">
-        <div className="mb-2 text-sm text-slate-600">
+      <div className="card card-pad">
+        <div className="mb-3 text-sm text-slate-600">
           {applied ? (
             <>
               행복e음이 이미 포착한{" "}
@@ -76,8 +76,8 @@ export default function Step2Dedup() {
               <div
                 key={h.id}
                 title={`${h.id}${h.haengbokFlagged ? " · 행복e음 기포착" : " · 잔여"}`}
-                className={`h-5 w-5 rounded-sm transition-all duration-500 ${cls} ${
-                  removed ? "scale-90 opacity-30" : "opacity-100"
+                className={`h-5 w-5 rounded-[5px] shadow-sm ring-1 ring-inset ring-black/5 transition-all duration-500 ${cls} ${
+                  removed ? "scale-75 opacity-25" : "opacity-100"
                 }`}
               />
             );
@@ -115,14 +115,16 @@ function Counter({
 }) {
   const toneCls =
     tone === "brand"
-      ? "border-brand-300 bg-brand-50 text-brand-700"
+      ? "border-brand-300 bg-brand-50 text-brand-700 shadow-card"
       : tone === "muted"
         ? "border-slate-200 bg-slate-50 text-slate-400"
-        : "border-slate-200 bg-white text-slate-700";
+        : "border-slate-200 bg-white text-slate-700 shadow-card";
   return (
-    <div className={`rounded-xl border p-3 text-center transition-colors duration-500 ${toneCls}`}>
-      <div className="text-3xl font-bold tabular-nums">{value}</div>
-      <div className="mt-0.5 text-xs">{label}</div>
+    <div
+      className={`rounded-xl border p-3.5 text-center transition-all duration-500 ${toneCls}`}
+    >
+      <div className="text-3xl font-bold tabular-nums leading-none">{value}</div>
+      <div className="mt-1.5 text-xs font-medium">{label}</div>
     </div>
   );
 }
